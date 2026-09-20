@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poised Pen, LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg: #F3EEE3;
+    --surface: #EAE2D0;
+    --ink: #2A2420;
+    --ink-soft: #5A5148;
+    --gold: #B8934A;
+    --silver: #9C9C94;
+    --peridot: #6F7C34;
+    --line: rgba(42, 36, 32, 0.16);
+    --serif-display: 'Cinzel', 'Georgia', serif;
+    --serif-body: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B1811;
+      --surface: #241F17;
+      --ink: #EDE6D6;
+      --ink-soft: #C7BEAC;
+      --gold: #D4B36A;
+      --silver: #B9B9AE;
+      --peridot: #A3B15A;
+      --line: rgba(237, 230, 214, 0.16);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #1B1811;
+    --surface: #241F17;
+    --ink: #EDE6D6;
+    --ink-soft: #C7BEAC;
+    --gold: #D4B36A;
+    --silver: #B9B9AE;
+    --peridot: #A3B15A;
+    --line: rgba(237, 230, 214, 0.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif-body);
+    font-size: 19px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+
+  .brand {
+    font-family: var(--serif-display);
+    font-size: 17px;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .navlinks {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navlinks a {
+    text-decoration: none;
+    font-size: 17px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .navlinks a:hover,
+  .navlinks a:focus-visible {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .navlinks a:focus-visible { outline: none; }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 108px 0 96px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-mark {
+    position: absolute;
+    right: -0.06em;
+    top: -0.22em;
+    font-family: var(--serif-display);
+    font-size: clamp(220px, 34vw, 460px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line);
+    font-weight: 500;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5px 1fr;
+    gap: 28px;
+    max-width: 660px;
+  }
+
+  .hero-rule {
+    background: var(--gold);
+    border-radius: 0;
+  }
+
+  .kicker {
+    font-family: var(--serif-body);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 20px;
+    margin: 0 0 18px;
+  }
+
+  h1.title {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 62px);
+    line-height: 1.08;
+    margin: 0 0 26px;
+    letter-spacing: 0.01em;
+  }
+
+  .lede {
+    font-size: 23px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 34px;
+    font-style: italic;
+  }
+
+  .cta-row { display: flex; gap: 28px; align-items: center; }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-family: var(--serif-body);
+    font-size: 18px;
+    color: var(--bg);
+    background: var(--ink);
+    padding: 13px 30px;
+    border: 1px solid var(--ink);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .btn:hover, .btn:focus-visible { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+  .btn-ghost {
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Section shell ---------- */
+
+  section { padding: 90px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: clamp(30px, 4vw, 40px);
+    margin: 0 0 8px;
+  }
+
+  .section-sub {
+    color: var(--silver);
+    font-style: italic;
+    font-size: 19px;
+    margin: 0 0 52px;
+  }
+
+  /* ---------- About ---------- */
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .monogram {
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .monogram::before,
+  .monogram::after {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--gold);
+    opacity: 0.55;
+  }
+
+  .monogram::after { inset: 20px; opacity: 0.3; }
+
+  .monogram span {
+    font-family: var(--serif-display);
+    font-size: 92px;
+    color: var(--gold);
+  }
+
+  .about-copy p { font-size: 21px; margin: 0 0 22px; }
+
+  .about-copy p:first-child {
+    font-size: 25px;
+    color: var(--ink);
+  }
+
+  .credentials {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+  }
+
+  .credentials div {
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+
+  .credentials strong {
+    display: block;
+    font-family: var(--serif-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--peridot);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Services ---------- */
+
+  .services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service {
+    padding: 4px 40px 0 0;
+    border-left: 1px solid var(--line);
+    padding-left: 40px;
+  }
+
+  .service:first-child { border-left: none; padding-left: 0; }
+
+  .service h3 {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0 0 16px;
+    line-height: 1.3;
+  }
+
+  .service p {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 0 0 20px;
+  }
+
+  .service .tag {
+    font-style: italic;
+    color: var(--gold);
+    font-size: 17px;
+  }
+
+  /* ---------- Contact ---------- */
+
+  .contact { text-align: center; }
+
+  .contact .section-sub { margin-left: auto; margin-right: auto; }
+
+  .email-link {
+    display: inline-block;
+    font-family: var(--serif-display);
+    font-size: clamp(26px, 4.5vw, 42px);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+    margin: 12px 0 26px;
+    word-break: break-word;
+  }
+
+  .email-link:hover, .email-link:focus-visible { color: var(--gold); }
+
+  .contact-note {
+    color: var(--ink-soft);
+    font-size: 18px;
+    font-style: italic;
+    max-width: 42ch;
+    margin: 0 auto;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer .brand { font-size: 14px; letter-spacing: 0.12em; }
+
+  footer .fine {
+    font-size: 15px;
+    color: var(--silver);
+    font-style: italic;
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 760px) {
+    .wrap { padding: 0 22px; }
+    .navlinks { gap: 20px; }
+    .navlinks a { font-size: 15px; }
+    .hero { padding: 72px 0 64px; }
+    .hero-mark { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .monogram { max-width: 220px; aspect-ratio: 1; }
+    .services { grid-template-columns: 1fr; gap: 40px; }
+    .service { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+    .service:first-child { border-top: none; padding-top: 0; }
+    section { padding: 64px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="#top">POISED&nbsp;PEN</a>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-mark" aria-hidden="true">P</div>
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="hero-rule" aria-hidden="true"></div>
+        <div>
+          <p class="kicker">Poised Pen, LLC</p>
+          <h1 class="title">Documents written by someone who has sat on the other side of the desk.</h1>
+          <p class="lede">Resumes, compliance templates, and operational guides, built on twenty years inside AML, KYC, and BSA programs.</p>
+          <div class="cta-row">
+            <a class="btn" href="#services">See the services</a>
+            <a class="btn-ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="monogram" aria-hidden="true"><span>P</span></div>
+      <div class="about-copy">
+        <p>Poised Pen, LLC. With 20+ years in AML, KYC, and BSA compliance &mdash; across banking, cannabis, and federal government work &mdash; Poised Pen brings an insider's eye to resume writing, compliance templates, and operational guides built to hold up under real scrutiny.</p>
+        <p>Poised Pen was founded on a simple idea: the people best equipped to write a compliance resume or build a KYC template are the ones who have reviewed thousands of them. That experience runs through large financial institutions and a medical cannabis company, alongside time in federal government work.</p>
+        <p>That vantage point shapes everything Poised Pen produces: resumes written the way hiring managers in risk and compliance actually read them, and templates built to hold up against an examiner, not just look tidy in a folder.</p>
+        <div class="credentials">
+          <div><strong>Background</strong>AML &middot; KYC &middot; BSA compliance</div>
+          <div><strong>Sectors</strong>Banking &middot; Cannabis &middot; Federal</div>
+          <div><strong>Also credentialed</strong>Notary public &middot; Loan signing agent</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="section-head">Services</h2>
+      <p class="section-sub">Three ways to work together, each grounded in the same compliance background.</p>
+      <div class="services">
+        <div class="service">
+          <h3>Resume Writing</h3>
+          <p>Resumes and LinkedIn profiles for compliance, risk, banking, and financial crimes professionals, positioned the way hiring managers in this field actually screen and read.</p>
+          <span class="tag">For job seekers &amp; career changers</span>
+        </div>
+        <div class="service">
+          <h3>Compliance Templates</h3>
+          <p>Investigation trackers, KYC onboarding checklists, and BSA program starter kits, built from real audit and examiner expectations rather than generic form language.</p>
+          <span class="tag">For compliance teams &amp; small institutions</span>
+        </div>
+        <div class="service">
+          <h3>Operational Guides</h3>
+          <p>Step-by-step playbooks that translate regulatory requirements and internal procedures into instructions a team can actually follow, day to day.</p>
+          <span class="tag">For growing businesses</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2 class="section-head">Get in touch</h2>
+      <p class="section-sub">Tell me what you're working on, and I'll follow up personally.</p>
+      <a class="email-link" href="mailto:poisedpenllc@yahoo.com">poisedpenllc@yahoo.com</a>
+      <p class="contact-note">Response within one to two business days.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span class="brand">POISED&nbsp;PEN, LLC</span>
+  <span class="fine">Founded by a 20-year AML/BSA/KYC compliance veteran &mdash; turning industry insight into resumes, templates, and guides that actually work.</span>
+</footer>
+
+</body>
+</html>
